@@ -1,0 +1,5 @@
+/target
+*.class
+*.sw[a-z]
+*.pyc
+/ignore
