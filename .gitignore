@@ -5,3 +5,5 @@
 /ignore
 /work
 .settings
+.project
+.classpath
