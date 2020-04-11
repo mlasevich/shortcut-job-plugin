@@ -8,8 +8,8 @@
 
   <j:choose>
     <j:when test="${it.redirect}">
-      <p><j:out value="${%targetBlurb(it.targetUrl, it.targetUrl)}"/></p>
-      <st:redirect url="${it.targetUrl}"/>
+      <p><j:out value="${%targetBlurb(it.targetUrl, it.redirectionUrl)}"/></p>
+      <st:redirect url="${it.redirectionUrl}"/>
     </j:when>
     <j:otherwise>
       <l:layout title="${it.displayName}">
@@ -18,7 +18,7 @@
           <j:choose>
             <j:when test="${it.configured}">
               <h1>${%Shortcut} ${it.name}</h1>
-              <p><j:out value="${%targetBlurb(it.targetUrl, it.targetUrl)}"/></p>
+              <p><j:out value="${%targetBlurb(it.targetUrl, it.redirectionUrl)}"/></p>
             </j:when>
             <j:otherwise>
               <h1>${%Unconfigured shortcut} ${it.name}</h1>

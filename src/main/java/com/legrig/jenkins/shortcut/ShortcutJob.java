@@ -34,6 +34,7 @@ import hudson.model.TopLevelItem;
 import hudson.model.TopLevelItemDescriptor;
 import hudson.util.FormApply;
 import hudson.util.QuotedStringTokenizer;
+import jenkins.model.Jenkins;
 import jenkins.model.item_category.StandaloneProjectsCategory;
 import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
@@ -42,6 +43,7 @@ import net.sf.json.JSONObject;
 public class ShortcutJob extends AbstractItem implements TopLevelItem{
 
     private static final Logger log = Logger.getLogger(ShortcutJob.class.getName());
+
     private volatile String targetUrl;
     private volatile boolean enabled;
 
@@ -60,7 +62,31 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
     public String getTargetUrl() {
         return targetUrl;
     }
-    
+
+    public String getRedirectionUrl() {
+        String target = getTargetUrl();
+        if (StringUtils.isNotBlank(target)) {
+            // If proper HTTP(*) url, return as is
+            if (target.startsWith("http://") || target.startsWith("https://")) {
+                return target;
+            }
+            // If fully qualified relative url, return as is
+            if (target.startsWith("/")) {
+                return target;
+            }
+            // Return prefixed with jenkins URL
+            String rootUrl = Jenkins.getInstance().getRootUrl();
+            if (rootUrl==null) {
+                //TODO: do something
+                log.log(Level.WARNING, "Unexpected NULL from getRootUrl()");
+                rootUrl = "";
+            }
+            return ""+Jenkins.getInstance().getRootUrl()+target;
+        }
+        // If not set
+        return Jenkins.getInstance().getRootUrl();
+    }
+
     public boolean isConfigured(){
         return (!(StringUtils.isEmpty(this.targetUrl)));
     }
