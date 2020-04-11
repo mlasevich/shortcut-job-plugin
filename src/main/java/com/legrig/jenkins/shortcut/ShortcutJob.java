@@ -42,11 +42,18 @@ import net.sf.json.JSONObject;
 
 public class ShortcutJob extends AbstractItem implements TopLevelItem{
 
+    private static final String ID = "shortcut-job";
+
+    private static final String ICON_16 = "plugin/"+ID+"/images/16x16/shortcutjob.png";
+    private static final String ICON_24 = "plugin/"+ID+"/images/24x24/shortcutjob.png";
+    private static final String ICON_32 = "plugin/"+ID+"/images/32x32/shortcutjob.png";
+    private static final String ICON_48 = "plugin/"+ID+"/images/48x48/shortcutjob.png";
+
     private static final Logger log = Logger.getLogger(ShortcutJob.class.getName());
 
     private volatile String targetUrl;
     private volatile boolean enabled;
-
+    
     @DataBoundConstructor
     public ShortcutJob(ItemGroup parent, String name) {
         super(parent, name);
@@ -54,13 +61,16 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
         this.enabled = true;
     }
 
-
     /**
      * Get target URL
      * @return configured Target URL
      */
     public String getTargetUrl() {
         return targetUrl;
+    }
+
+    public String getLargeIcon() {
+        return ICON_48;
     }
 
     public String getRedirectionUrl() {
@@ -138,13 +148,13 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
 
         static {
             IconSet.icons.addIcon(new Icon("icon-shortcutjob-project icon-sm",
-                    "plugin/shortcut-job-plugin/images/16x16/shortcutjob.png", Icon.ICON_SMALL_STYLE));
+                    ICON_16, Icon.ICON_SMALL_STYLE));
             IconSet.icons.addIcon(new Icon("icon-shortcutjob-project icon-md",
-                    "plugin/shortcut-job-plugin/images/24x24/shortcutjob.png", Icon.ICON_MEDIUM_STYLE));
+                    ICON_24, Icon.ICON_MEDIUM_STYLE));
             IconSet.icons.addIcon(new Icon("icon-shortcutjob-project icon-lg",
-                    "plugin/shortcut-job-plugin/images/32x32/shortcutjob.png", Icon.ICON_LARGE_STYLE));
+                    ICON_32, Icon.ICON_LARGE_STYLE));
             IconSet.icons.addIcon(new Icon("icon-shortcutjob-project icon-xlg",
-                    "plugin/shortcut-job-plugin/images/48x48/shortcutjob.png", Icon.ICON_XLARGE_STYLE));
+                    ICON_48, Icon.ICON_XLARGE_STYLE));
         }
     }
 

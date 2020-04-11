@@ -1,4 +1,5 @@
 <?jelly escape-by-default='true'?>
 <div>
+  <img width="48" height="48" style="margin: 2px;" alt="${%Shortcut}" src="${resURL}/${it.largeIcon}"/>
   ${it.description}
 </div>

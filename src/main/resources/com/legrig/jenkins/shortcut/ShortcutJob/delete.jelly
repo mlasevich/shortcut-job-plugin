@@ -5,7 +5,9 @@
     <st:include page="sidepanel.jelly"/>
     <l:main-panel>
       <form method="post" action="doDelete">
-        ${%Are you sure about deleting this shortcut?}
+        <p>
+          <img width="24" height="24" style="margin: 2px;" alt="${%Shortcut}" src="${resURL}/${it.largeIcon}"/>
+          ${%Are you sure about deleting this shortcut?}</p>
         <f:submit value="${%Yes}"/>
       </form>
     </l:main-panel>

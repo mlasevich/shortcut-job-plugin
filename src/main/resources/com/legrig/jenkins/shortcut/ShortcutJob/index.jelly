@@ -15,10 +15,14 @@
       <l:layout title="${it.displayName}">
         <st:include page="sidepanel.jelly"/>
         <l:main-panel>
+        
           <j:choose>
             <j:when test="${it.configured}">
-              <h1>${%Shortcut} ${it.name}</h1>
-              <p><j:out value="${%targetBlurb(it.targetUrl, it.redirectionUrl)}"/></p>
+              <h1><img width="24" height="24" style="margin: 2px;" alt="${%Shortcut}" src="${resURL}/${it.largeIcon}"/>
+                  ${%Shortcut} ${it.name}</h1>
+              <p>
+                <j:out value="${%targetBlurb(it.targetUrl, it.redirectionUrl)}"/>
+              </p>
             </j:when>
             <j:otherwise>
               <h1>${%Unconfigured shortcut} ${it.name}</h1>

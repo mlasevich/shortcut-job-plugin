@@ -17,7 +17,7 @@
 
         <j:if test="${it.isNameEditable()}">
           <f:entry title="${%name(it.pronoun)}">
-            <f:textbox name="name" title="${%Name}" value="${it.name}" />
+            <f:textbox name="${%Name}" value="${it.name}" />
           </f:entry>
         </j:if>
 

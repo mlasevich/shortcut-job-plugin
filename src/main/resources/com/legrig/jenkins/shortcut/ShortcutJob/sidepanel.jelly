@@ -8,7 +8,7 @@
     <l:tasks>
       <j:set var="url" value="${h.getNearestAncestorUrl(request,it)}"/>
       <l:task icon="images/24x24/up.png" href="${rootURL}/" title="${%Back to Dashboard}"/>
-      <l:task icon="images/24x24/edit-delete.png" href="${url}/delete" title="${%Delete Shortcut}" permission="${it.DELETE}" enabled="${it.disabled}"/>
+      <l:task icon="images/24x24/edit-delete.png" href="${url}/delete" title="${%Delete Shortcut}" permission="${it.DELETE}"/>
       <l:hasPermission permission="${it.CONFIGURE}">
         <l:task icon="images/24x24/setting.png" href="${url}/configure" title="${%Configure}"/>
       </l:hasPermission>
