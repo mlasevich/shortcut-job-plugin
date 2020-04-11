@@ -18,18 +18,23 @@ import org.apache.commons.lang.StringUtils;
 import org.jenkins.ui.icon.Icon;
 import org.jenkins.ui.icon.IconSet;
 import org.jenkinsci.Symbol;
+import org.jvnet.localizer.LocaleProvider;
+import org.jvnet.localizer.Localizable;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.interceptor.RequirePOST;
 
 import hudson.Extension;
 import hudson.model.AbstractItem;
+import hudson.model.AbstractStatusIcon;
 import hudson.model.Descriptor;
 import hudson.model.HealthReport;
 import hudson.model.Hudson;
 import hudson.model.ItemGroup;
 import hudson.model.Job;
+import hudson.model.StockStatusIcon;
 import hudson.model.TopLevelItem;
 import hudson.model.TopLevelItemDescriptor;
 import hudson.util.FormApply;
@@ -61,6 +66,10 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
         this.enabled = true;
     }
 
+    public ShortcutIcon getIconColor() {
+        return new ShortcutIcon();
+    }
+    
     /**
      * Get target URL
      * @return configured Target URL
@@ -158,6 +167,36 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
         }
     }
 
+    public final class ShortcutIcon extends AbstractStatusIcon {
+        private final Localizable description;
+        private final String image;
+
+        public ShortcutIcon() {
+            image = ICON_48;
+            description = Messages._ShortcutJob_ShortcutIcon_Description();
+        }
+
+        public String getImageOf(String size) {
+            String icon = image;
+            switch(size) {
+                case "16x16": 
+                    icon = ICON_16;
+                    break;
+                case "24x24": 
+                    icon = ICON_24;
+                    break;
+                case "32x32": 
+                    icon = ICON_32;
+                    break;
+            }
+            return Stapler.getCurrentRequest().getContextPath()+ Jenkins.RESOURCE_PATH+"/"+icon;
+        }
+
+        public String getDescription() {
+            return description.toString(LocaleProvider.getLocale());
+        }
+    }
+
     public Collection<? extends Job> getAllJobs() {
         return Collections.emptyList();
     }
@@ -183,7 +222,8 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
                 Hudson.checkGoodName(newName);
                 if (FormApply.isApply(req)) {
                     FormApply.applyResponse("notificationBar.show("
-                            + QuotedStringTokenizer.quote("You must use the Save button if you wish to rename a job")
+                            + QuotedStringTokenizer.quote(
+                                    "You must use the Save button if you wish to rename a job")
                             + ",notificationBar.WARNING)").generateResponse(req, rsp, (Object) null);
                 } else {
                     rsp.sendRedirect("rename?newName=" + URLEncoder.encode(newName, "UTF-8"));
@@ -211,12 +251,15 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
     }
 
     public HealthReport getBuildHealth() {
-        return new HealthReport();
+        HealthReport health = new HealthReport();
+        health.setIconUrl(ICON_48);
+        return health;
     }
 
-    public String getIcon() {
-        return this.getDescriptor().getIconFilePath("48x48");
+    public static String getIcon() {
+        return ICON_48;
     }
+
 
     @RequirePOST
     public void doDoRename(final StaplerRequest req, final StaplerResponse rsp) 
