@@ -1,0 +1,8 @@
+<?jelly escape-by-default='true'?>
+<div>
+  <img width="24" height="24" style="margin: 2px;" alt="" 
+      src="${resURL}/plugin/shortcut-job-plugin/images/24x24/shortcutjob.png"/>
+  <j:jelly xmlns:j="jelly:core">
+    <j:out value="${it.description}"/>
+  </j:jelly>
+</div>

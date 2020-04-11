@@ -1,4 +1,4 @@
 <?jelly escape-by-default='true'?>
 <div>
-    TODO
+    Allow creation of Items that are Shortcuts to other jobs or URLs
 </div>

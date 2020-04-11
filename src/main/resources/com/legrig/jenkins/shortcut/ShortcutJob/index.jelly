@@ -1,0 +1,32 @@
+<?jelly escape-by-default='true'?>
+
+<j:jelly
+  xmlns:j="jelly:core" xmlns:st="jelly:stapler"
+  xmlns:d="jelly:define" xmlns:l="/lib/layout"
+  xmlns:t="/lib/hudson" xmlns:f="/lib/form"
+  xmlns:i="jelly:fmt" xmlns:p="/lib/hudson/project">
+
+  <j:choose>
+    <j:when test="${it.redirect}">
+      <p><j:out value="${%targetBlurb(it.targetUrl, it.targetUrl)}"/></p>
+      <st:redirect url="${it.targetUrl}"/>
+    </j:when>
+    <j:otherwise>
+      <l:layout title="${it.displayName}">
+        <st:include page="sidepanel.jelly"/>
+        <l:main-panel>
+          <j:choose>
+            <j:when test="${it.configured}">
+              <h1>${%Shortcut} ${it.name}</h1>
+              <p><j:out value="${%targetBlurb(it.targetUrl, it.targetUrl)}"/></p>
+            </j:when>
+            <j:otherwise>
+              <h1>${%Unconfigured shortcut} ${it.name}</h1>
+              <p><j:out value="${%targetConfigure}"/></p>
+            </j:otherwise>
+          </j:choose>
+        </l:main-panel>
+      </l:layout>
+    </j:otherwise>
+  </j:choose>
+</j:jelly>

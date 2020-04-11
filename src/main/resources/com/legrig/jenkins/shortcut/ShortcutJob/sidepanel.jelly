@@ -1,0 +1,17 @@
+<?jelly escape-by-default='true'?>
+<!--
+  Config page. derived class specific entries should go to configure-entries.jsp
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:x="jelly:xml" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout"
+         xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+  <l:side-panel>
+    <l:tasks>
+      <j:set var="url" value="${h.getNearestAncestorUrl(request,it)}"/>
+      <l:task icon="images/24x24/up.png" href="${rootURL}/" title="${%Back to Dashboard}"/>
+      <l:task icon="images/24x24/edit-delete.png" href="${url}/delete" title="${%Delete Shortcut}" permission="${it.DELETE}" enabled="${it.disabled}"/>
+      <l:hasPermission permission="${it.CONFIGURE}">
+        <l:task icon="images/24x24/setting.png" href="${url}/configure" title="${%Configure}"/>
+      </l:hasPermission>
+    </l:tasks>
+  </l:side-panel>
+</j:jelly>
