@@ -1,5 +1,7 @@
 # <img src="src/main/webapp/images/24x24/shortcutjob.png"> Shortcut Job Plugin
 
+[![Build Status](https://travis-ci.org/mlasevich/shortcut-job-plugin.svg?branch=master)](https://travis-ci.org/mlasevich/shortcut-job-plugin)
+
 
 ## Introduction
 
