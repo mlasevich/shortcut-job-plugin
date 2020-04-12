@@ -167,7 +167,7 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
         }
     }
 
-    public final class ShortcutIcon extends AbstractStatusIcon {
+    public final static class ShortcutIcon extends AbstractStatusIcon {
         private final Localizable description;
         private final String image;
 
@@ -187,6 +187,9 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
                     break;
                 case "32x32": 
                     icon = ICON_32;
+                    break;
+                default:
+                    icon = ICON_48;
                     break;
             }
             return Stapler.getCurrentRequest().getContextPath()+ Jenkins.RESOURCE_PATH+"/"+icon;

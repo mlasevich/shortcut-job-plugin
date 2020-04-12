@@ -22,8 +22,9 @@ script:
     mvn -Pjacoco clean verify -B -V \
       -Daccess-modifier-checker.failOnError=true \
       --no-transfer-progress
-after_success:
-  - bash <(curl -s https://codecov.io/bash) -f "*jacoco.xml"
+
+#after_success:
+#  - bash <(curl -s https://codecov.io/bash) -f "*jacoco.xml"
 
 notifications:
   email: false
