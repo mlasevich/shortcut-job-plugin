@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.legrig.jenkins.shortcut;
 
@@ -34,7 +34,6 @@ import hudson.model.HealthReport;
 import hudson.model.Hudson;
 import hudson.model.ItemGroup;
 import hudson.model.Job;
-import hudson.model.StockStatusIcon;
 import hudson.model.TopLevelItem;
 import hudson.model.TopLevelItemDescriptor;
 import hudson.util.FormApply;
@@ -44,21 +43,20 @@ import jenkins.model.item_category.StandaloneProjectsCategory;
 import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 
-
-public class ShortcutJob extends AbstractItem implements TopLevelItem{
+public class ShortcutJob extends AbstractItem implements TopLevelItem {
 
     private static final String ID = "shortcut-job";
 
-    private static final String ICON_16 = "plugin/"+ID+"/images/16x16/shortcutjob.png";
-    private static final String ICON_24 = "plugin/"+ID+"/images/24x24/shortcutjob.png";
-    private static final String ICON_32 = "plugin/"+ID+"/images/32x32/shortcutjob.png";
-    private static final String ICON_48 = "plugin/"+ID+"/images/48x48/shortcutjob.png";
+    private static final String ICON_16 = "plugin/" + ID + "/images/16x16/shortcutjob.png";
+    private static final String ICON_24 = "plugin/" + ID + "/images/24x24/shortcutjob.png";
+    private static final String ICON_32 = "plugin/" + ID + "/images/32x32/shortcutjob.png";
+    private static final String ICON_48 = "plugin/" + ID + "/images/48x48/shortcutjob.png";
 
     private static final Logger log = Logger.getLogger(ShortcutJob.class.getName());
 
     private volatile String targetUrl;
     private volatile boolean enabled;
-    
+
     @DataBoundConstructor
     public ShortcutJob(ItemGroup parent, String name) {
         super(parent, name);
@@ -69,9 +67,10 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
     public ShortcutIcon getIconColor() {
         return new ShortcutIcon();
     }
-    
+
     /**
      * Get target URL
+     *
      * @return configured Target URL
      */
     public String getTargetUrl() {
@@ -95,18 +94,18 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
             }
             // Return prefixed with jenkins URL
             String rootUrl = Jenkins.getInstance().getRootUrl();
-            if (rootUrl==null) {
-                //TODO: do something
+            if (rootUrl == null) {
+                // TODO: do something
                 log.log(Level.WARNING, "Unexpected NULL from getRootUrl()");
                 rootUrl = "";
             }
-            return ""+Jenkins.getInstance().getRootUrl()+target;
+            return "" + Jenkins.getInstance().getRootUrl() + target;
         }
         // If not set
         return Jenkins.getInstance().getRootUrl();
     }
 
-    public boolean isConfigured(){
+    public boolean isConfigured() {
         return (!(StringUtils.isEmpty(this.targetUrl)));
     }
 
@@ -115,7 +114,7 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
     }
 
     public boolean isDisabled() {
-        return ! isEnabled();
+        return !isEnabled();
     }
 
     public boolean isRedirect() {
@@ -127,18 +126,20 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
         return new DescriptorImpl();
     }
 
-    @Extension(ordinal=1000) @Symbol({"linkJob","linkItemJob"})
+    @Extension(ordinal = 1000)
+    @Symbol({ "linkJob", "linkItemJob" })
     public static class DescriptorImpl extends TopLevelItemDescriptor {
         public DescriptorImpl() {
         }
 
-        
+        @Override
         public String getDisplayName() {
             return Messages.ShortcutJob_DescriptorImpl_DisplayName();
         }
 
+        @Override
         public ShortcutJob newInstance(ItemGroup parent, String name) {
-            return new ShortcutJob(parent,name);
+            return new ShortcutJob(parent, name);
         }
 
         @Override
@@ -151,19 +152,16 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
             return StandaloneProjectsCategory.ID;
         }
 
+        @Override
         public String getIconClassName() {
             return "icon-shortcutjob-project";
         }
 
         static {
-            IconSet.icons.addIcon(new Icon("icon-shortcutjob-project icon-sm",
-                    ICON_16, Icon.ICON_SMALL_STYLE));
-            IconSet.icons.addIcon(new Icon("icon-shortcutjob-project icon-md",
-                    ICON_24, Icon.ICON_MEDIUM_STYLE));
-            IconSet.icons.addIcon(new Icon("icon-shortcutjob-project icon-lg",
-                    ICON_32, Icon.ICON_LARGE_STYLE));
-            IconSet.icons.addIcon(new Icon("icon-shortcutjob-project icon-xlg",
-                    ICON_48, Icon.ICON_XLARGE_STYLE));
+            IconSet.icons.addIcon(new Icon("icon-shortcutjob-project icon-sm", ICON_16, Icon.ICON_SMALL_STYLE));
+            IconSet.icons.addIcon(new Icon("icon-shortcutjob-project icon-md", ICON_24, Icon.ICON_MEDIUM_STYLE));
+            IconSet.icons.addIcon(new Icon("icon-shortcutjob-project icon-lg", ICON_32, Icon.ICON_LARGE_STYLE));
+            IconSet.icons.addIcon(new Icon("icon-shortcutjob-project icon-xlg", ICON_48, Icon.ICON_XLARGE_STYLE));
         }
     }
 
@@ -176,30 +174,33 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
             description = Messages._ShortcutJob_ShortcutIcon_Description();
         }
 
+        @Override
         public String getImageOf(String size) {
             String icon = image;
-            switch(size) {
-                case "16x16": 
-                    icon = ICON_16;
-                    break;
-                case "24x24": 
-                    icon = ICON_24;
-                    break;
-                case "32x32": 
-                    icon = ICON_32;
-                    break;
-                default:
-                    icon = ICON_48;
-                    break;
+            switch (size) {
+            case "16x16":
+                icon = ICON_16;
+                break;
+            case "24x24":
+                icon = ICON_24;
+                break;
+            case "32x32":
+                icon = ICON_32;
+                break;
+            default:
+                icon = ICON_48;
+                break;
             }
-            return Stapler.getCurrentRequest().getContextPath()+ Jenkins.RESOURCE_PATH+"/"+icon;
+            return Stapler.getCurrentRequest().getContextPath() + Jenkins.RESOURCE_PATH + "/" + icon;
         }
 
+        @Override
         public String getDescription() {
             return description.toString(LocaleProvider.getLocale());
         }
     }
 
+    @Override
     public Collection<? extends Job> getAllJobs() {
         return Collections.emptyList();
     }
@@ -208,14 +209,14 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
         return true;
     }
 
-    public synchronized void doConfigSubmit(final StaplerRequest req, final StaplerResponse rsp) 
+    public synchronized void doConfigSubmit(final StaplerRequest req, final StaplerResponse rsp)
             throws IOException, ServletException, Descriptor.FormException {
         this.checkPermission(ShortcutJob.CONFIGURE);
         try {
             final JSONObject json = req.getSubmittedForm();
             final String targetUrl = json.optString("targetUrl", this.targetUrl);
             final boolean enabled = json.optBoolean("enabled", this.enabled);
-            if ((!StringUtils.equals(this.targetUrl, targetUrl))||(this.enabled != enabled)) {
+            if ((!StringUtils.equals(this.targetUrl, targetUrl)) || (this.enabled != enabled)) {
                 this.targetUrl = targetUrl;
                 this.enabled = enabled;
                 this.save();
@@ -225,8 +226,7 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
                 Hudson.checkGoodName(newName);
                 if (FormApply.isApply(req)) {
                     FormApply.applyResponse("notificationBar.show("
-                            + QuotedStringTokenizer.quote(
-                                    "You must use the Save button if you wish to rename a job")
+                            + QuotedStringTokenizer.quote("You must use the Save button if you wish to rename a job")
                             + ",notificationBar.WARNING)").generateResponse(req, rsp, (Object) null);
                 } else {
                     rsp.sendRedirect("rename?newName=" + URLEncoder.encode(newName, "UTF-8"));
@@ -263,10 +263,8 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
         return ICON_48;
     }
 
-
     @RequirePOST
-    public void doDoRename(final StaplerRequest req, final StaplerResponse rsp) 
-            throws IOException, ServletException {
+    public void doDoRename(final StaplerRequest req, final StaplerResponse rsp) throws IOException, ServletException {
         this.checkPermission(ShortcutJob.CREATE);
         this.checkPermission(ShortcutJob.DELETE);
         final String newName = req.getParameter("newName");
@@ -274,5 +272,4 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem{
         this.renameTo(newName);
         rsp.sendRedirect2(req.getContextPath() + '/' + this.getParent().getUrl() + this.getShortUrl());
     }
-
 }
