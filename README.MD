@@ -42,6 +42,8 @@ Simply create a new item with type Shortcut - enter a name for it and URL, and y
 
 * Currently when you save your item, you will be redirected to the URL immediately (if
   item is enabled)
+* Renaming of items broke sometime before initial release
+* Absolute lack of unit tests
 
 ## Changelog
 
