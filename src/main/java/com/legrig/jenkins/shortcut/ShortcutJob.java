@@ -3,17 +3,14 @@
  */
 package com.legrig.jenkins.shortcut;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.net.URLEncoder;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.servlet.ServletException;
-
+import hudson.Extension;
+import hudson.model.*;
+import hudson.util.FormApply;
+import hudson.util.QuotedStringTokenizer;
+import jenkins.model.Jenkins;
+import jenkins.model.item_category.StandaloneProjectsCategory;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.jenkins.ui.icon.Icon;
 import org.jenkins.ui.icon.IconSet;
@@ -25,23 +22,17 @@ import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.interceptor.RequirePOST;
+import org.kohsuke.stapler.verb.POST;
 
-import hudson.Extension;
-import hudson.model.AbstractItem;
-import hudson.model.AbstractStatusIcon;
-import hudson.model.Descriptor;
-import hudson.model.HealthReport;
-import hudson.model.Hudson;
-import hudson.model.ItemGroup;
-import hudson.model.Job;
-import hudson.model.TopLevelItem;
-import hudson.model.TopLevelItemDescriptor;
-import hudson.util.FormApply;
-import hudson.util.QuotedStringTokenizer;
-import jenkins.model.Jenkins;
-import jenkins.model.item_category.StandaloneProjectsCategory;
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
+import javax.servlet.ServletException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.URLEncoder;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ShortcutJob extends AbstractItem implements TopLevelItem {
 
@@ -93,7 +84,8 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem {
                 return target;
             }
             // Return prefixed with jenkins URL
-            String rootUrl = Jenkins.getInstance().getRootUrl();
+            Jenkins instance = Jenkins.getInstanceOrNull();
+            String rootUrl = (instance != null) ? instance.getRootUrlFromRequest() : null;
             if (rootUrl == null) {
                 // TODO: do something
                 log.log(Level.WARNING, "Unexpected NULL from getRootUrl()");
@@ -127,7 +119,7 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem {
     }
 
     @Extension(ordinal = 1000)
-    @Symbol({ "linkJob", "linkItemJob" })
+    @Symbol({"linkJob", "linkItemJob"})
     public static class DescriptorImpl extends TopLevelItemDescriptor {
         public DescriptorImpl() {
         }
@@ -178,18 +170,18 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem {
         public String getImageOf(String size) {
             String icon = image;
             switch (size) {
-            case "16x16":
-                icon = ICON_16;
-                break;
-            case "24x24":
-                icon = ICON_24;
-                break;
-            case "32x32":
-                icon = ICON_32;
-                break;
-            default:
-                icon = ICON_48;
-                break;
+                case "16x16":
+                    icon = ICON_16;
+                    break;
+                case "24x24":
+                    icon = ICON_24;
+                    break;
+                case "32x32":
+                    icon = ICON_32;
+                    break;
+                default:
+                    icon = ICON_48;
+                    break;
             }
             return Stapler.getCurrentRequest().getContextPath() + Jenkins.RESOURCE_PATH + "/" + icon;
         }
@@ -209,6 +201,7 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem {
         return true;
     }
 
+    @POST
     public synchronized void doConfigSubmit(final StaplerRequest req, final StaplerResponse rsp)
             throws IOException, ServletException, Descriptor.FormException {
         this.checkPermission(ShortcutJob.CONFIGURE);
@@ -247,7 +240,6 @@ public class ShortcutJob extends AbstractItem implements TopLevelItem {
     }
 
     public void doLastBuild(final StaplerRequest req, final StaplerResponse rsp) throws IOException, ServletException {
-        log.log(Level.WARNING, "doLastBuild: run!");
         if (rsp != null) {
             rsp.sendRedirect2(".");
         }
