@@ -19,7 +19,7 @@ install: skip
 
 script:
   - |
-    mvn -Pjacoco clean verify -B -V \
+    ./mvnw -Pjacoco clean verify -B -V \
       -Daccess-modifier-checker.failOnError=true \
       --no-transfer-progress
 
