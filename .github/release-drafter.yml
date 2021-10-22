@@ -1,0 +1,4 @@
+_extends: .github
+tag-template: shortcut-job-$NEXT_MINOR_VERSION
+name-template: Shortcut Job Plugin v$NEXT_PATCH_VERSION
+
