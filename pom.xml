@@ -24,6 +24,9 @@
       >= 1.580.1 use JTH 2.0 or higher. ~ hpi-plugin.version: The HPI Maven Plugin 
       version used by the plugin.. ~ stapler-plugin.version: The Stapler Maven 
       plugin version required by the plugin. -->
+    <spotbugs.effort>Max</spotbugs.effort>
+    <spotbugs.failOnError>true</spotbugs.failOnError>
+    <spotbugs.threshold>Low</spotbugs.threshold>
   </properties>
   <name>Shortcut Job Plugin</name>
   <description>Allow creation of Jobs that are Shortcuts to other jobs or URLs</description>
