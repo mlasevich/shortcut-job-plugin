@@ -1,16 +1,19 @@
 /**
- *
+ * Shortcut Job Jenkins Plugin
  */
 package com.legrig.jenkins.shortcut;
 
-import hudson.Extension;
-import hudson.model.*;
-import hudson.util.FormApply;
-import hudson.util.QuotedStringTokenizer;
-import jenkins.model.Jenkins;
-import jenkins.model.item_category.StandaloneProjectsCategory;
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.URLEncoder;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.servlet.ServletException;
+
 import org.apache.commons.lang.StringUtils;
 import org.jenkins.ui.icon.Icon;
 import org.jenkins.ui.icon.IconSet;
@@ -24,15 +27,22 @@ import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.interceptor.RequirePOST;
 import org.kohsuke.stapler.verb.POST;
 
-import javax.servlet.ServletException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.net.URLEncoder;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import hudson.Extension;
+import hudson.model.AbstractItem;
+import hudson.model.AbstractStatusIcon;
+import hudson.model.Descriptor;
+import hudson.model.HealthReport;
+import hudson.model.Hudson;
+import hudson.model.ItemGroup;
+import hudson.model.Job;
+import hudson.model.TopLevelItem;
+import hudson.model.TopLevelItemDescriptor;
+import hudson.util.FormApply;
+import hudson.util.QuotedStringTokenizer;
+import jenkins.model.Jenkins;
+import jenkins.model.item_category.StandaloneProjectsCategory;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
 
 public class ShortcutJob extends AbstractItem implements TopLevelItem {
 
