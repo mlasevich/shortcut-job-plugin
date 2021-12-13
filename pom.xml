@@ -77,7 +77,7 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-api</artifactId>
-      <version>2.47</version>
+      <version>1105.v3de5e2efac97</version>
       <scope>test</scope>
     </dependency>
     <dependency>
