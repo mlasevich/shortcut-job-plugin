@@ -17,7 +17,7 @@
     <gitHubRepo>mlasevich/shortcut-job-plugin</gitHubRepo>
     <!-- Baseline Jenkins version you use to build the plugin. Users must have
       this version or newer to run. -->
-    <jenkins.version>2.289.1</jenkins.version>
+    <jenkins.version>2.303.3</jenkins.version>
     <java.level>8</java.level>
     <!-- Other properties you may want to use: ~ jenkins-test-harness.version:
       Jenkins Test Harness version you use to test the plugin. For Jenkins version
@@ -42,24 +42,24 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>structs</artifactId>
-      <version>1.24</version>
+      <version>315.v1cf0d78d9e85</version>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-step-api</artifactId>
-      <version>622.vb_8e7c15b_c95a_</version>
+      <version>625.v2e7cf5fc4211</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-cps</artifactId>
-      <version>2.94</version>
+      <version>2633.v6baeedc13805</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-job</artifactId>
-      <version>2.42</version>
+      <version>1145.v7f2433caa07f</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -71,19 +71,31 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-durable-task-step</artifactId>
-      <version>2.40</version>
+      <version>1159.va_968a_dfd1283</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins</groupId>
+      <artifactId>scm-api</artifactId>
+      <version>595.vd5a_df5eb_0e39</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins</groupId>
+      <artifactId>script-security</artifactId>
+      <version>1131.v8b_b_5eda_c328e</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-api</artifactId>
-      <version>2.47</version>
+      <version>1136.v7f5f1759dc16</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-support</artifactId>
-      <version>3.8</version>
+      <version>815.vce765985340b_</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
