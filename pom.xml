@@ -53,13 +53,13 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-cps</artifactId>
-      <version>2.94</version>
+      <version>2648.va9433432b33c</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-job</artifactId>
-      <version>2.42</version>
+      <version>1167.v8fe861b_09ef9</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -77,13 +77,13 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-api</artifactId>
-      <version>2.47</version>
+      <version>1136.v7f5f1759dc16</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-support</artifactId>
-      <version>3.8</version>
+      <version>813.vb_d7c3d2984a_0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
