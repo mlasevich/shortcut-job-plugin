@@ -95,7 +95,7 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-support</artifactId>
-      <version>815.vce765985340b_</version>
+      <version>815.vd60466279fc8</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
