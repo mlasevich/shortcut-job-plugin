@@ -77,7 +77,7 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>scm-api</artifactId>
-      <version>595.vd5a_df5eb_0e39</version>
+      <version>608.vfa_f971c5a_a_e9</version>
       <scope>test</scope>
     </dependency>
     <dependency>
